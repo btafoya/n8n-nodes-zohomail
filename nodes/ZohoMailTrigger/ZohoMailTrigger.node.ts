@@ -6,6 +6,7 @@ import type {
 	IPollFunctions,
 } from 'n8n-workflow';
 import { NodeConnectionTypes } from 'n8n-workflow';
+import { cronNodeOptions } from 'n8n-workflow';
 
 import { getFolders } from '../ZohoMail/operations/folder.operations';
 import { normalizeReceivedTime, zohoMailApiRequest } from '../../transport';
@@ -38,6 +39,19 @@ export class ZohoMailTrigger implements INodeType {
 			},
 		],
 		properties: [
+			{
+				displayName: 'Poll Times',
+				name: 'pollTimes',
+				type: 'fixedCollection',
+				typeOptions: {
+					multipleValues: true,
+					multipleValueButtonText: 'Add Poll Time',
+				},
+				default: { item: [{ mode: 'everyMinute' }] },
+				description: 'Time at which polling should occur',
+				placeholder: 'Add Poll Time',
+				options: cronNodeOptions,
+			},
 			{
 				displayName: 'Account ID',
 				name: 'accountId',

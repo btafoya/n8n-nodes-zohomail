@@ -21,5 +21,6 @@
 		"skipLibCheck": true,
 		"outDir": "./dist/"
 	},
-	"include": ["index.ts", "credentials/**/*", "nodes/**/*", "nodes/**/*.json", "transport/**/*.ts", "package.json"]
+	"include": ["index.ts", "credentials/**/*", "nodes/**/*", "nodes/**/*.json", "transport/**/*.ts", "package.json"],
+	"exclude": ["**/*.test.ts"]
 }

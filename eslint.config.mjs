@@ -9,7 +9,7 @@ export default tseslint.config(
 				project: './tsconfig.json',
 			},
 		},
-		ignores: ['vitest.config.ts'],
+		ignores: ['vitest.config.ts', '**/*.test.ts'],
 		rules: {
 			'@typescript-eslint/no-explicit-any': 'off',
 		},

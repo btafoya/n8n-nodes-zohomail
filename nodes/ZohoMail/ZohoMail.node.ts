@@ -401,19 +401,17 @@ export class ZohoMail implements INodeType {
 				placeholder: 'data',
 			},
 			{
-				displayName: 'Attachment IDs',
-				name: 'attachmentIds',
-				type: 'string',
-				typeOptions: {
-					multipleValues: true,
-				},
+				displayName: 'Attachment Uploads',
+				name: 'attachmentUploads',
+				type: 'json',
 				displayOptions: {
 					show: {
 						resource: ['message'],
 						operation: ['send'],
 					},
 				},
-				default: [],
+				default: '[]',
+				description: 'Array of upload objects from a previous Attachment → Upload operation. Each object must include storeName, attachmentPath, and attachmentName.',
 			},
 			// Message > reply
 			{

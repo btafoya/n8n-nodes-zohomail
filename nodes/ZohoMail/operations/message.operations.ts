@@ -7,7 +7,7 @@ import type {
 } from 'n8n-workflow';
 
 import { joinAddresses, toArray, zohoMailApiRequest } from '../../../transport';
-import type { ZohoMessageContent, ZohoMessageSummary } from '../../../transport/types';
+import type { ZohoAttachmentUpload, ZohoMessageContent, ZohoMessageSummary } from '../../../transport/types';
 import { getAttachment } from './attachment.operations';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -25,7 +25,8 @@ function formatZohoDate(value: string | number | undefined): string | undefined 
 export async function getLabels(
 	this: ILoadOptionsFunctions,
 ): Promise<INodePropertyOptions[]> {
-	const accountId = this.getNodeParameter('accountId', 0) as string;
+	const accountId = (this.getCurrentNodeParameter('accountId') as string | undefined) ?? '';
+	if (!accountId) return [];
 	const response = (await zohoMailApiRequest.call(this, 'GET', `/api/accounts/${accountId}/labels`)) as {
 		data?: Array<{ labelId: string; labelName: string }>;
 	};
@@ -129,7 +130,9 @@ export async function sendMessage(
 	const content = this.getNodeParameter('content', 0, '') as string;
 	const htmlContent = this.getNodeParameter('htmlContent', 0, '') as string;
 	const attachmentPropertyNames = this.getNodeParameter('attachments', 0, []) as string | string[];
-	const attachmentIds = this.getNodeParameter('attachmentIds', 0, []) as string | string[];
+	const extraAttachmentUploads = this.getNodeParameter('attachmentUploads', 0, []) as Array<
+		Partial<ZohoAttachmentUpload>
+	>;
 
 	const body: IDataObject = {
 		fromAddress,
@@ -161,9 +164,13 @@ export async function sendMessage(
 			attachmentUploads.push(upload as unknown as IDataObject);
 		}
 	}
-	for (const id of toArray(attachmentIds)) {
-		// IDs from previous upload operations are used as-is
-		attachmentUploads.push({ attachmentId: id });
+	for (const upload of toArray(extraAttachmentUploads)) {
+		if (!upload.storeName || !upload.attachmentPath || !upload.attachmentName) {
+			throw new Error(
+				'Each attachment upload must include storeName, attachmentPath, and attachmentName.',
+			);
+		}
+		attachmentUploads.push(upload as unknown as IDataObject);
 	}
 	if (attachmentUploads.length > 0) {
 		body.attachments = attachmentUploads;
@@ -263,7 +270,7 @@ export async function updateMessages(
 		body.destfolderId = this.getNodeParameter('destfolderId', 0) as string;
 	}
 	if (mode === 'setFlag') {
-		body.flagid = this.getNodeParameter('flagid', 0) as string;
+		body.flagid = (this.getNodeParameter('flagid', 0, '') as string) || 'flag_not_set';
 	}
 	if (mode === 'applyLabel' || mode === 'removeLabel') {
 		const labelId = this.getNodeParameter('labelId', 0) as string;
