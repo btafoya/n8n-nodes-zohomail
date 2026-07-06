@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.8 - 2026-07-06
+
+### Added
+- Status filter (`all`, `read`, `unread`, `flagged`, `unflagged`) to message Get All, Search, and ZohoMailTrigger polling.
+
 ## 0.1.7 - 2026-07-06
 
 ### Added
