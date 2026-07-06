@@ -32,9 +32,14 @@ npm install /path/to/n8n-nodes-zohomail
 
 ```bash
 npm install
-npm run build
-npm run dev
+npm run build   # n8n-node build — compile TypeScript and bundle assets
+npm run dev     # n8n-node dev — local n8n preview with hot reload at http://localhost:5678
+npm run lint    # n8n-node lint — check code against n8n community node rules
 ```
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md).
 
 ## Credentials
 
