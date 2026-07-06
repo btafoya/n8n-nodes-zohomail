@@ -6,7 +6,7 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 } from 'n8n-workflow';
-import { listAccounts } from './operations/account.operations';
+import { getAccounts, listAccounts } from './operations/account.operations';
 import { executeFolderOperation, getFolders } from './operations/folder.operations';
 import {
 	deleteMessage,
@@ -42,11 +42,14 @@ export class ZohoMail implements INodeType {
 		],
 		properties: [
 			{
-				displayName: 'Account ID',
+				displayName: 'Account',
 				name: 'accountId',
-				type: 'string',
+				type: 'options',
+				typeOptions: {
+					loadOptionsMethod: 'getAccounts',
+				},
 				default: '={{$credentials.defaultAccountId}}',
-				description: 'Zoho Mail account ID. Falls back to the credential default when empty.',
+				description: 'Zoho Mail account. Falls back to the credential default when empty.',
 			},
 			{
 				displayName: 'Resource',
@@ -588,6 +591,7 @@ export class ZohoMail implements INodeType {
 
 	methods = {
 		loadOptions: {
+			getAccounts,
 			getFolders,
 			getLabels,
 		},

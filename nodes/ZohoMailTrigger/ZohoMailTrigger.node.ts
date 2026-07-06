@@ -5,6 +5,7 @@ import type {
 	INodeTypeDescription,
 	IPollFunctions,
 } from 'n8n-workflow';
+import { getAccounts } from '../ZohoMail/operations/account.operations';
 import { getFolders } from '../ZohoMail/operations/folder.operations';
 import { normalizeReceivedTime, zohoMailApiRequest } from '../../transport';
 import type { ZohoMessageSummary } from '../../transport/types';
@@ -174,11 +175,14 @@ export class ZohoMailTrigger implements INodeType {
 				],
 			},
 			{
-				displayName: 'Account ID',
+				displayName: 'Account',
 				name: 'accountId',
-				type: 'string',
+				type: 'options',
+				typeOptions: {
+					loadOptionsMethod: 'getAccounts',
+				},
 				default: '={{$credentials.defaultAccountId}}',
-				description: 'Zoho Mail account ID. Falls back to the credential default when empty.',
+				description: 'Zoho Mail account. Falls back to the credential default when empty.',
 			},
 			{
 				displayName: 'Folder',
@@ -210,6 +214,7 @@ export class ZohoMailTrigger implements INodeType {
 
 	methods = {
 		loadOptions: {
+			getAccounts,
 			getFolders,
 		},
 	};
