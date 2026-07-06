@@ -1,0 +1,45 @@
+{
+  "name": "n8n-nodes-zohomail",
+  "version": "0.1.0",
+  "description": "n8n node for Zoho Mail",
+  "keywords": [
+    "n8n",
+    "n8n-community-node-package",
+    "zoho",
+    "zoho-mail",
+    "email"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Brian Tafoya",
+    "email": "btafoya@briantafoya.com"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/ZohoMailOAuth2Api.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/ZohoMail/ZohoMail.node.js",
+      "dist/nodes/ZohoMailTrigger/ZohoMailTrigger.node.js"
+    ]
+  },
+  "scripts": {
+    "build": "tsc && n8n-node build",
+    "dev": "n8n-node dev",
+    "lint": "n8n-node lint",
+    "release": "n8n-node release",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@n8n/node-cli": "^0.23.0",
+    "@n8n/typescript-config": "^1.0.0",
+    "n8n-workflow": "^1.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^4.1.10"
+  }
+}
