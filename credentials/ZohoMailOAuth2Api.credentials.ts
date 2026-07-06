@@ -6,10 +6,6 @@ import type {
 	INodeProperties,
 } from 'n8n-workflow';
 
-const authUrlExpression = `={{$credentials.dataCenter === 'us' ? 'https://accounts.zoho.com/oauth/v2/auth' : $credentials.dataCenter === 'eu' ? 'https://accounts.zoho.eu/oauth/v2/auth' : $credentials.dataCenter === 'in' ? 'https://accounts.zoho.in/oauth/v2/auth' : $credentials.dataCenter === 'au' ? 'https://accounts.zoho.com.au/oauth/v2/auth' : $credentials.dataCenter === 'jp' ? 'https://accounts.zoho.jp/oauth/v2/auth' : $credentials.dataCenter === 'ca' ? 'https://accounts.zohocloud.ca/oauth/v2/auth' : $credentials.dataCenter === 'cn' ? 'https://accounts.zoho.com.cn/oauth/v2/auth' : $credentials.dataCenter === 'ae' ? 'https://accounts.zoho.ae/oauth/v2/auth' : 'https://accounts.zoho.sa/oauth/v2/auth'}}`;
-
-const tokenUrlExpression = `={{$credentials.dataCenter === 'us' ? 'https://accounts.zoho.com/oauth/v2/token' : $credentials.dataCenter === 'eu' ? 'https://accounts.zoho.eu/oauth/v2/token' : $credentials.dataCenter === 'in' ? 'https://accounts.zoho.in/oauth/v2/token' : $credentials.dataCenter === 'au' ? 'https://accounts.zoho.com.au/oauth/v2/token' : $credentials.dataCenter === 'jp' ? 'https://accounts.zoho.jp/oauth/v2/token' : $credentials.dataCenter === 'ca' ? 'https://accounts.zohocloud.ca/oauth/v2/token' : $credentials.dataCenter === 'cn' ? 'https://accounts.zoho.com.cn/oauth/v2/token' : $credentials.dataCenter === 'ae' ? 'https://accounts.zoho.ae/oauth/v2/token' : 'https://accounts.zoho.sa/oauth/v2/token'}}`;
-
 const apiBaseUrlExpression = `={{$credentials.dataCenter === 'us' ? 'https://mail.zoho.com' : $credentials.dataCenter === 'eu' ? 'https://mail.zoho.eu' : $credentials.dataCenter === 'in' ? 'https://mail.zoho.in' : $credentials.dataCenter === 'au' ? 'https://mail.zoho.com.au' : $credentials.dataCenter === 'jp' ? 'https://mail.zoho.jp' : $credentials.dataCenter === 'ca' ? 'https://mail.zohocloud.ca' : $credentials.dataCenter === 'cn' ? 'https://mail.zoho.com.cn' : $credentials.dataCenter === 'ae' ? 'https://mail.zoho.ae' : 'https://mail.zoho.sa'}}`;
 
 export class ZohoMailOAuth2Api implements ICredentialType {
@@ -67,24 +63,40 @@ export class ZohoMailOAuth2Api implements ICredentialType {
 			description: 'Used when the node does not override the account ID',
 		},
 		{
-			displayName: 'Grant Type',
-			name: 'grantType',
-			type: 'hidden',
-			default: 'authorizationCode',
-		},
-		{
 			displayName: 'Authorization URL',
 			name: 'authUrl',
-			type: 'hidden',
-			default: authUrlExpression,
+			type: 'options',
+			default: 'https://accounts.zoho.com/oauth/v2/auth',
 			required: true,
+			options: [
+				{ name: 'US', value: 'https://accounts.zoho.com/oauth/v2/auth' },
+				{ name: 'EU', value: 'https://accounts.zoho.eu/oauth/v2/auth' },
+				{ name: 'India', value: 'https://accounts.zoho.in/oauth/v2/auth' },
+				{ name: 'Australia', value: 'https://accounts.zoho.com.au/oauth/v2/auth' },
+				{ name: 'Japan', value: 'https://accounts.zoho.jp/oauth/v2/auth' },
+				{ name: 'Canada', value: 'https://accounts.zohocloud.ca/oauth/v2/auth' },
+				{ name: 'China', value: 'https://accounts.zoho.com.cn/oauth/v2/auth' },
+				{ name: 'UAE', value: 'https://accounts.zoho.ae/oauth/v2/auth' },
+				{ name: 'Saudi Arabia', value: 'https://accounts.zoho.sa/oauth/v2/auth' },
+			],
 		},
 		{
 			displayName: 'Access Token URL',
 			name: 'accessTokenUrl',
-			type: 'hidden',
-			default: tokenUrlExpression,
+			type: 'options',
+			default: 'https://accounts.zoho.com/oauth/v2/token',
 			required: true,
+			options: [
+				{ name: 'US', value: 'https://accounts.zoho.com/oauth/v2/token' },
+				{ name: 'EU', value: 'https://accounts.zoho.eu/oauth/v2/token' },
+				{ name: 'India', value: 'https://accounts.zoho.in/oauth/v2/token' },
+				{ name: 'Australia', value: 'https://accounts.zoho.com.au/oauth/v2/token' },
+				{ name: 'Japan', value: 'https://accounts.zoho.jp/oauth/v2/token' },
+				{ name: 'Canada', value: 'https://accounts.zohocloud.ca/oauth/v2/token' },
+				{ name: 'China', value: 'https://accounts.zoho.com.cn/oauth/v2/token' },
+				{ name: 'UAE', value: 'https://accounts.zoho.ae/oauth/v2/token' },
+				{ name: 'Saudi Arabia', value: 'https://accounts.zoho.sa/oauth/v2/token' },
+			],
 		},
 		{
 			displayName: 'Scope',
