@@ -17,16 +17,66 @@ Repository: [https://github.com/btafoya/n8n-nodes-zohomail](https://github.com/b
 
 ## Installation
 
+Community nodes can only be installed on **self-hosted** n8n instances. They are not available on n8n Cloud.
+
+### Install from the n8n GUI
+
+1. Open your n8n instance and go to **Settings > Community Nodes**.
+2. Select **Install**.
+3. Enter the npm package name: `@btafoya/n8n-nodes-zohomail`.
+   - You can also append a version or dist-tag, for example `@btafoya/n8n-nodes-zohomail@1.2.3`.
+4. Check **I understand the risks of installing unverified code from a public source**.
+5. Select **Install**. n8n installs the node and adds it to the **Community Nodes** list.
+
+### Install manually with npm
+
+Use this method when your n8n instance runs in queue mode or when you want to install private packages.
+
+From inside your n8n installation or container:
+
 ```bash
-npm install @btafoya/n8n-nodes-zohomail
+mkdir -p ~/.n8n/nodes
+cd ~/.n8n/nodes
+npm i @btafoya/n8n-nodes-zohomail
 ```
 
-Or install from a local build:
+Then restart n8n.
+
+Other useful commands:
+
+```bash
+npm uninstall @btafoya/n8n-nodes-zohomail
+npm update @btafoya/n8n-nodes-zohomail
+npm install @btafoya/n8n-nodes-zohomail@1.2.3
+```
+
+### Install from a local build
 
 ```bash
 cd /path/to/n8n
 npm install /path/to/n8n-nodes-zohomail
 ```
+
+### Install with environment variables
+
+Available from n8n v2.21.0. Set the following environment variables on your n8n instance, then restart:
+
+```bash
+export N8N_COMMUNITY_PACKAGES_ENABLED=true
+export N8N_COMMUNITY_PACKAGES_MANAGED_BY_ENV=true
+export N8N_COMMUNITY_PACKAGES='[{"name":"@btafoya/n8n-nodes-zohomail"}]'
+```
+
+In `docker-compose.yml`:
+
+```yaml
+environment:
+  - N8N_COMMUNITY_PACKAGES_ENABLED=true
+  - N8N_COMMUNITY_PACKAGES_MANAGED_BY_ENV=true
+  - 'N8N_COMMUNITY_PACKAGES=[{"name":"@btafoya/n8n-nodes-zohomail"}]'
+```
+
+> **Warning:** Enabling `N8N_COMMUNITY_PACKAGES_MANAGED_BY_ENV=true` uninstalls any community packages that are not listed in `N8N_COMMUNITY_PACKAGES` on startup.
 
 ## Development
 
