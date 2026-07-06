@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-zohomail",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "n8n node for Zoho Mail",
   "keywords": [
     "n8n",
@@ -41,5 +41,10 @@
     "n8n-workflow": "^1.0.0",
     "typescript": "^5.0.0",
     "vitest": "^4.1.10"
+  },
+  "allowScripts": {
+    "isolated-vm@6.1.2": true,
+    "unrs-resolver@1.12.2": true,
+    "eslint-plugin-n8n-nodes-base@1.16.5": true
   }
 }
