@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.4 - 2026-07-06
+
+### Fixed
+- Correct `unflag` operation payload, polling interval handling, `loadOptions` references, and attachment upload shape.
+- Fix `LIcense` filename extension.
+
+### Changed
+- README updated for scoped package name `@btafoya/n8n-nodes-zohomail`.
+- Project `CLAUDE.md` removed from repository.
+
+### Added
+- n8n community node installation instructions in README.
+- MIT license.
+- n8n-node CLI commands and changelog link in README.
+
 ## 0.1.3 - 2026-07-06
 
 ### Changed
