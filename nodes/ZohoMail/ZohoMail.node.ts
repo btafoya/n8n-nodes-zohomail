@@ -6,8 +6,6 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 } from 'n8n-workflow';
-import { NodeConnectionTypes } from 'n8n-workflow';
-
 import { listAccounts } from './operations/account.operations';
 import { executeFolderOperation, getFolders } from './operations/folder.operations';
 import {
@@ -34,8 +32,8 @@ export class ZohoMail implements INodeType {
 		defaults: {
 			name: 'Zoho Mail',
 		},
-		inputs: [NodeConnectionTypes.Main],
-		outputs: [NodeConnectionTypes.Main],
+		inputs: ['main'],
+		outputs: ['main'],
 		credentials: [
 			{
 				name: 'zohoMailOAuth2Api',
