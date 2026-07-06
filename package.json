@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-zohomail",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "n8n node for Zoho Mail",
   "keywords": [
     "n8n",
