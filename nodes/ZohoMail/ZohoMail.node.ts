@@ -186,6 +186,25 @@ export class ZohoMail implements INodeType {
 				},
 				default: 1,
 			},
+			{
+				displayName: 'Status',
+				name: 'status',
+				type: 'options',
+				displayOptions: {
+					show: {
+						resource: ['message'],
+						operation: ['getAll'],
+					},
+				},
+				options: [
+					{ name: 'All', value: 'all' },
+					{ name: 'Read', value: 'read' },
+					{ name: 'Unread', value: 'unread' },
+					{ name: 'Flagged', value: 'flagged' },
+					{ name: 'Unflagged', value: 'unflagged' },
+				],
+				default: 'all',
+			},
 			// Message > search
 			{
 				displayName: 'Search Filters',
@@ -255,6 +274,19 @@ export class ZohoMail implements INodeType {
 						name: 'start',
 						type: 'number',
 						default: 1,
+					},
+					{
+						displayName: 'Status',
+						name: 'status',
+						type: 'options',
+						options: [
+							{ name: 'All', value: 'all' },
+							{ name: 'Read', value: 'read' },
+							{ name: 'Unread', value: 'unread' },
+							{ name: 'Flagged', value: 'flagged' },
+							{ name: 'Unflagged', value: 'unflagged' },
+						],
+						default: 'all',
 					},
 					{
 						displayName: 'Include To',
@@ -623,7 +655,8 @@ export class ZohoMail implements INodeType {
 						const folderId = this.getNodeParameter('folderId', 0) as string;
 						const limit = this.getNodeParameter('limit', 0, 25) as number;
 						const start = this.getNodeParameter('start', 0, 1) as number;
-						responseData = await getAllMessages.call(this, accountId, folderId, limit, start);
+						const status = this.getNodeParameter('status', 0, 'all') as string;
+						responseData = await getAllMessages.call(this, accountId, folderId, limit, start, status);
 						break;
 					}
 					case 'search':

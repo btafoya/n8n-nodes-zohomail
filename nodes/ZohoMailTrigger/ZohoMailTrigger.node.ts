@@ -203,6 +203,28 @@ export class ZohoMailTrigger implements INodeType {
 				description: 'Maximum number of messages to fetch per poll',
 			},
 			{
+				displayName: 'Limit',
+				name: 'limit',
+				type: 'number',
+				default: 50,
+				typeOptions: { minValue: 1, maxValue: 200 },
+				description: 'Maximum number of messages to fetch per poll',
+			},
+			{
+				displayName: 'Status',
+				name: 'status',
+				type: 'options',
+				options: [
+					{ name: 'All', value: 'all' },
+					{ name: 'Read', value: 'read' },
+					{ name: 'Unread', value: 'unread' },
+					{ name: 'Flagged', value: 'flagged' },
+					{ name: 'Unflagged', value: 'unflagged' },
+				],
+				default: 'all',
+				description: 'Only poll messages matching this status',
+			},
+			{
 				displayName: 'Fetch Historical',
 				name: 'fetchHistorical',
 				type: 'boolean',
@@ -233,23 +255,29 @@ export class ZohoMailTrigger implements INodeType {
 
 		const folderId = this.getNodeParameter('folderId') as string;
 		const limit = this.getNodeParameter('limit', 50) as number;
+		const status = this.getNodeParameter('status', 'all') as string;
 		const fetchHistorical = this.getNodeParameter('fetchHistorical', false) as boolean;
 
 		const staticData = this.getWorkflowStaticData('node') as TriggerStaticData;
 		const lastReceivedTime = staticData.lastReceivedTime ?? 0;
 		const seenMessageIds = new Set(staticData.seenMessageIds ?? []);
 
+		const qs: IDataObject = {
+			folderId,
+			limit,
+			sortBy: 'date',
+			sortorder: false,
+		};
+		if (status && status !== 'all') {
+			qs.status = status;
+		}
+
 		const response = (await zohoMailApiRequest.call(
 			this,
 			'GET',
 			`/api/accounts/${accountId}/messages/view`,
 			{},
-			{
-				folderId,
-				limit,
-				sortBy: 'date',
-				sortorder: false,
-			},
+			qs,
 		)) as { data?: ZohoMessageSummary[] };
 
 		const messages = response.data ?? [];

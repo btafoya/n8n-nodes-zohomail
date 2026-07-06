@@ -39,6 +39,7 @@ export async function getAllMessages(
 	folderId: string,
 	limit: number,
 	start: number,
+	status?: string,
 ): Promise<INodeExecutionData[]> {
 	const qs: IDataObject = {
 		folderId,
@@ -47,6 +48,9 @@ export async function getAllMessages(
 		sortBy: 'date',
 		sortorder: false,
 	};
+	if (status && status !== 'all') {
+		qs.status = status;
+	}
 	const response = (await zohoMailApiRequest.call(this, 'GET', `/api/accounts/${accountId}/messages/view`, {}, qs)) as {
 		data?: ZohoMessageSummary[];
 	};
@@ -65,6 +69,7 @@ export async function searchMessages(
 		searchFolderId,
 		searchStartTime,
 		searchEndTime,
+		status,
 		limit,
 		start,
 		includeto,
@@ -86,6 +91,9 @@ export async function searchMessages(
 		start: start ?? 1,
 		limit: limit ?? 25,
 	};
+	if (status && status !== 'all') {
+		qs.status = status;
+	}
 	if (includeto) qs.includeto = true;
 
 	const response = (await zohoMailApiRequest.call(
