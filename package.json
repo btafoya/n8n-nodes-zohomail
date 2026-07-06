@@ -1,5 +1,5 @@
 {
-  "name": "n8n-nodes-zohomail",
+  "name": "@btafoya/n8n-nodes-zohomail",
   "version": "0.1.3",
   "description": "n8n node for Zoho Mail",
   "keywords": [
