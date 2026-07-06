@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.6 - 2026-07-06
+
+### Fixed
+- Change Zoho OAuth credential `authUrl` and `accessTokenUrl` from expression-derived hidden fields to explicit options dropdowns, avoiding `Invalid URL` errors during credential connection on n8n 2.28.
+
 ## 0.1.5 - 2026-07-06
 
 ### Fixed
