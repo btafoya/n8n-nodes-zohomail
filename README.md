@@ -1,6 +1,6 @@
-# n8n-nodes-zohomail
+# @btafoya/n8n-nodes-zohomail
 
-[![npm version](https://img.shields.io/npm/v/n8n-nodes-zohomail.svg)](https://www.npmjs.com/package/n8n-nodes-zohomail)
+[![npm version](https://img.shields.io/npm/v/@btafoya/n8n-nodes-zohomail.svg)](https://www.npmjs.com/package/@btafoya/n8n-nodes-zohomail)
 [![GitHub license](https://img.shields.io/github/license/btafoya/n8n-nodes-zohomail.svg)](https://github.com/btafoya/n8n-nodes-zohomail/blob/main/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/btafoya/n8n-nodes-zohomail.svg)](https://github.com/btafoya/n8n-nodes-zohomail/issues)
 [![GitHub stars](https://img.shields.io/github/stars/btafoya/n8n-nodes-zohomail.svg?style=social)](https://github.com/btafoya/n8n-nodes-zohomail/stargazers)
@@ -18,7 +18,7 @@ Repository: [https://github.com/btafoya/n8n-nodes-zohomail](https://github.com/b
 ## Installation
 
 ```bash
-npm install n8n-nodes-zohomail
+npm install @btafoya/n8n-nodes-zohomail
 ```
 
 Or install from a local build:
