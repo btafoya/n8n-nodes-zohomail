@@ -6,5 +6,5 @@ dist/
 .claude/
 CLAUDE.md
 docs/
-.mcp
 .codegraph/
+.mcp.json
