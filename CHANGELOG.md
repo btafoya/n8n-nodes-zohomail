@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.5 - 2026-07-06
+
+### Fixed
+- Replace `NodeConnectionTypes.Main` and `cronNodeOptions` imports with compatible literals for older `n8n-workflow` versions, resolving `Class could not be found` install errors on n8n 2.28.
+
 ## 0.1.4 - 2026-07-06
 
 ### Fixed
