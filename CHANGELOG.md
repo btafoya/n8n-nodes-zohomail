@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.7 - 2026-07-06
+
+### Added
+- Account dropdown in ZohoMail and ZohoMailTrigger nodes, populated from `/api/accounts` with labels like `email (accountId)`.
+
 ## 0.1.6 - 2026-07-06
 
 ### Fixed
