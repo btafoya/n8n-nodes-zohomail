@@ -9,3 +9,7 @@ docs/
 .codegraph/
 .mcp.json
 .serena/
+zohomail-diagnose-20260708-224345.tar.gz
+scripts/diagnose-zohomail-node.sh
+docker-compose.yml
+compose.yml
